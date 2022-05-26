@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ""
+      dockerfile: Dockerfile
+    container_name: gio-app
+    restart: always
+    working_dir: /var/www/
+    volumes:
+      - ../src:/var/www
+  nginx:
+    image: nginx:1.19-alpine
+    container_name: gio-nginx
+    restart: always
+    ports:
+      - 8000:80
+    volumes:
+      - ../src:/var/www
+      - ./nginx:/etc/nginx/conf.d
+  composer_installation:
+    container_name: composer_installation
+    image: composer
+    working_dir: /var/www/
+    volumes:
+      - ../src:/var/www
+    command: sh -c "composer install --ignore-platform-reqs && cp .env.example .env && php artisan key:generate"
