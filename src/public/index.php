@@ -1,34 +1,29 @@
+<html>
+<head>
+    <title>Users profile</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<ul>
+    <li class="navbar"><a href="/">Home</a></li>
+    <li class="navbar"><a href="/source">Source</a></li>
+</ul>
+</body>
+</html>
+
 <?php
-
-require __DIR__ . '/../vendor/autoload.php';
-
 
 use App\ApiControllers\FetchApi;
 
-$repos_url = "https://api.tvmaze.com/search/shows?q=girls";
-$data = new FetchApi($repos_url);
+require __DIR__ . '/../vendor/autoload.php';
 
-$results = $data->getData();
+define('VIEW_PATH', __DIR__ . '/../views');
 
-foreach ($results as $result) {
-    echo $result->show->id . ' ' . '<br />';
-}
+$router = new \App\Route\Router();
 
-//$repos_data = curl_init($repos_url);
-//curl_setopt($repos_data, CURLOPT_URL, $repos_url);
-//curl_setopt($repos_data, CURLOPT_RETURNTRANSFER, true);
-//
-//
-//$headers = array(
-//    "User-Agent: ReqBin Curl Client/1.0",
-//);
-//curl_setopt($repos_data, CURLOPT_HTTPHEADER, $headers);
-//
-//$repos_response =json_decode(curl_exec($repos_data));
-//curl_close($repos_data);
-//
-////print_r($repos_response);
-//
-//foreach ($repos_response as $response) {
-//    echo $response->show->id . '<br />';
-//}
+$router
+    ->get('/', [App\Controllers\HomeController::class, 'update'])
+    ->post('/', [App\Controllers\HomeController::class, 'store'])
+    ->get('/source', [App\Controllers\SourceController::class, 'index']);
+
+echo $router->resolve($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

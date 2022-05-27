@@ -3,9 +3,8 @@
 
 namespace App\Controllers;
 
-
 use App\ViewsControllers\View;
-use Ramsey\Uuid\Uuid;
+use App\ApiControllers\FetchApi;
 
 class HomeController {
     public function index(): string {
@@ -13,46 +12,29 @@ class HomeController {
     }
 
     public function update(): View {
+        $url = "https://api.tvmaze.com/search/shows?q=girls";
+        $data = new FetchApi($url);
 
-        return View::make('forms/form');
-    }
+        $results = $data->getData();
 
-    public function store() {
-        $form = View::make('forms/form');
-
-        $userName = $_POST['userName'];
-
-        $repos_url = "https://api.github.com/users/{$userName}/repos";
-        $followers_url = "https://api.github.com/users/{$userName}/followers";
-
-        $repos_data = curl_init($repos_url);
-        $followers_data = curl_init($followers_url);
-        curl_setopt($repos_data, CURLOPT_URL, $repos_url);
-        curl_setopt($repos_data, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($followers_data, CURLOPT_URL, $followers_url);
-        curl_setopt($followers_data, CURLOPT_RETURNTRANSFER, true);
-
-        $headers = array(
-            "User-Agent: ReqBin Curl Client/1.0",
-        );
-        curl_setopt($repos_data, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($followers_data, CURLOPT_HTTPHEADER, $headers);
-
-        $repos_response =json_decode(curl_exec($repos_data));
-        $followers_response =json_decode(curl_exec($followers_data));
-        curl_close($repos_data);
-        curl_close($followers_data);
-
-
-        $repos = View::make('user/githubInfo',
+        return View::make('shows/GirlsShow',
             [
-                'repos_response' => $repos_response,
-                'followers_response' => $followers_response,
-                'userName' => $userName,
+                'results' => $results,
             ]
         );
-
-        return $form . $repos;
-
     }
+
+//    public function store(): View {
+//        $url = "https://api.tvmaze.com/search/shows?q=girls";
+//        $data = new FetchApi($url);
+//
+//        $results = $data->getData();
+//
+//        $shows = View::make('shows/GirlsShow', [
+//                'results' => $results,
+//            ]
+//        );
+//        return $shows;
+//
+//    }
 }
