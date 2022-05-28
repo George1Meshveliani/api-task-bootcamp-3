@@ -26,3 +26,15 @@ services:
     volumes:
       - ../src:/var/www
     command: sh -c "composer install --ignore-platform-reqs && cp .env.example .env && php artisan key:generate"
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
