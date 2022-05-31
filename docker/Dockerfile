@@ -7,7 +7,9 @@ RUN apt-get update && apt-get install -y \
     vim \
     unzip
 
+# It's in not recommended to install composer with docker,
+# however, since we use this docker-file for beginners we can run this command just in case.
+# It is better to have composer installed on your local machine already.
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
 
 WORKDIR /var/www
