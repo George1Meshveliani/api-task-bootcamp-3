@@ -18,6 +18,11 @@ require __DIR__ . '/../vendor/autoload.php';
 
 define('VIEW_PATH', __DIR__ . '/../views');
 
+echo phpinfo();
+
+$db = new PDO('mysql:host=db', 'root', 'changeme');
+var_dump($db);
+
 $router = new \App\Route\Router();
 
 $router
