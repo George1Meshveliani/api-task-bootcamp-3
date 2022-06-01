@@ -18,10 +18,16 @@ require __DIR__ . '/../vendor/autoload.php';
 
 define('VIEW_PATH', __DIR__ . '/../views');
 
-echo phpinfo();
 
-$db = new PDO('mysql:host=db', 'root', 'changeme');
-var_dump($db);
+$db = new PDO('mysql:host=db;dbname=favorite_shows_database', 'root', 'changeme');
+
+$query = 'SELECT * FROM shows_list';
+$shows = $db->query($query);
+
+foreach ($shows as $show) {
+    echo '<br />';
+    var_dump($show);
+}
 
 $router = new \App\Route\Router();
 
