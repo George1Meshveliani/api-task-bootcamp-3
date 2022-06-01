@@ -18,30 +18,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 define('VIEW_PATH', __DIR__ . '/../views');
 
-try {
-    $db = new PDO('mysql:host=db;dbname=favorite_shows_database', 'root', 'changeme');
 
-    $name = "TV show";
-    $channel = "BBC";
-
-    $query = 'INSERT INTO shows_list (name, channel)
-              VALUES (:name, :channel)';
-    $id_query = 'SELECT * FROM shows_list WHERE id =';
-
-    $stmt = $db->prepare($query);
-
-    $stmt->bindValue(':name', $name);
-    $stmt->bindValue(':channel', $channel);
-
-    $stmt->execute();
-
-    $id = (int) $db->lastInsertId();
-
-    $show = $db->query($id_query . $id)->fetch();
-
-} catch (\PDOException $e) {
-    throw new \PDOException($e->getMessage(), (int) $e->getCode());
-}
 
 $router = new \App\Route\Router();
 
