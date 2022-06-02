@@ -24,7 +24,8 @@ $router = new \App\Route\Router();
 
 $router
     ->get('/', [App\Controllers\HomeController::class, 'update'])
+//    ->get('/', [App\Controllers\HomeController::class, 'insert'])
     ->post('/', [App\Controllers\HomeController::class, 'store'])
     ->get('/source', [App\Controllers\SourceController::class, 'index']);
 
-echo $router->resolve($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
+echo $router->resolve($_SERVER['REQUEST_URI'],  $_SERVER['REQUEST_METHOD']);
