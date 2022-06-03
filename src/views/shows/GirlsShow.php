@@ -5,35 +5,7 @@
     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
             <div class="overflow-hidden">
-                <div class="flex justify-center">
-                    <div class="mb-3 xl:w-96">
-                    <input
-                            type="text"
-                            id="myInput"
-                            onkeyup="searchFunction()"
-                            placeholder="Choose your favorite show..."
-                            title="Type in a name"
-                            class="
-                                    form-control
-                                    block
-                                    w-full
-                                    px-3
-                                    py-1.5
-                                    text-base
-                                    font-normal
-                                    text-gray-700
-                                    bg-white bg-clip-padding
-                                    border border-solid border-gray-300
-                                    rounded
-                                    transition
-                                    ease-in-out
-                                    m-0
-                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-                                  "
-                    >
-                    </div>
-                </div>
-
+                <?php require 'SearchBar.php'?>
                 <table class="min-w-full text-center" id="myTable">
                     <thead class="border-b">
                     <tr class="header">
@@ -58,8 +30,6 @@
                         <?php endforeach; ?>
                     </thead>
                 </table>
-<!--        </div>-->
-<!--            <script type="text/javascript" src="./filter.js"></script>-->
                 <script>
                     function searchFunction() {
                         var input, filter, table, tr, td, i, txtValue;
@@ -85,7 +55,6 @@
     </div>
 </div>
 
-<!--    </form>-->
-    <?php require 'GirlsShowForm.php' ?>
+<?php require 'GirlsShowForm.php' ?>
 
 
