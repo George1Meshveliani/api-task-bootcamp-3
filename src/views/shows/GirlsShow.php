@@ -11,7 +11,7 @@
                             type="text"
                             id="myInput"
                             onkeyup="searchFunction()"
-                            placeholder="Search by names.."
+                            placeholder="Choose your favorite show..."
                             title="Type in a name"
                             class="
                                     form-control
@@ -39,6 +39,7 @@
                     <tr class="header">
                         <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4" >Name</th>
                         <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4" >Channel</th>
+                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4" >Country</th>
                     </tr>
                         <?php foreach ($results as $result): ?>
                         <tr class="border-b">
@@ -47,6 +48,11 @@
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><?php echo ' ' . $result->show->network->name ?></td>
                             <?php else: ?>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><?php echo "CNN" ?></td>
+                            <?php endif; ?>
+                            <?php if (!empty($result->show->network->country->name)): ?>
+                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><?php echo $result->show->network->country->name ?></td>
+                            <?php else: ?>
+                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><?php echo "UK" ?></td>
                             <?php endif; ?>
                         </tr>
                         <?php endforeach; ?>
