@@ -22,6 +22,14 @@ define('VIEW_PATH', __DIR__ . '/../views');
 
 $router = new \App\Route\Router();
 
+//if (isset($_POST['checkbox'])) {
+//    var_dump('true');
+//}
+//else {
+//    var_dump('false');
+//}
+//var_dump($_POST['checkbox']);
+
 $router
     ->get('/', [App\Controllers\HomeController::class, 'update'])
 //    ->get('/', [App\Controllers\HomeController::class, 'insert'])

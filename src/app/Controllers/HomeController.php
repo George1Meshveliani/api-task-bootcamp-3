@@ -23,7 +23,7 @@ class HomeController {
 //        $data_to_insert = new InsertExample($db);
 //        $data_to_insert->insertDataExample( 'shows_list');
 
-
+//        var_dump($results);
         return View::make('shows/GirlsShow',
             [
                 'results' => $results,
@@ -32,17 +32,17 @@ class HomeController {
     }
 
 
-//    public function store(): View {
-//        $url = "https://api.tvmaze.com/search/shows?q=girls";
-//        $data = new FetchApi($url);
-//
-//        $results = $data->getData();
-//
-//        $shows = View::make('shows/GirlsShow', [
-//                'results' => $results,
-//            ]
-//        );
-//        return $shows;
-//
-//    }
+    public function store(): View {
+
+        $value0 = 0;
+        $value1 = 1;
+
+        $showsForm = View::make('shows/GirlsShowForm', [
+                'value0' => $value0,
+                'value1' => $value1,
+            ]
+        );
+        return $showsForm;
+
+    }
 }
