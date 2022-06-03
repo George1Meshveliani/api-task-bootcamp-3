@@ -1,8 +1,10 @@
-## Instructions
+#### Instructions
 
-1. `cd githubs-users-info` - Go to the project directory
-2. `cd docker` - Open a docker directory
-3. `docker-compose up` - Run the project
-4. `localhost:8000` - Open a browser on your local server
-5. `docker-compose down` - Stop the project
+1. `cd docker`
+2. Start the project: `docker-compose up`
+3. Website path: [localhost:8000](http://localhost:8000/)
+4. Database path: [localhost:8080](http://localhost:8080/)
+5. Database username: `root`
+6. Initial password of the database: `changeme`
+7. Shut down the project: `docker-compose down`
 
