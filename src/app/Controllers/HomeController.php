@@ -9,6 +9,7 @@ use App\ApiControllers\FetchApi;
 use PDO;
 
 class HomeController {
+
     public function index(): string {
         return 'Data';
     }

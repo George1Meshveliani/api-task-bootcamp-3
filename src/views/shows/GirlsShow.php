@@ -1,60 +1,31 @@
 <head>
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<div class="flex flex-col">
-    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-            <div class="overflow-hidden">
-                <?php require 'SearchBar.php'?>
-                <table class="min-w-full text-center" id="myTable">
-                    <thead class="border-b">
-                    <tr class="header">
-                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4" >Name</th>
-                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4" >Channel</th>
-                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4" >Country</th>
-                    </tr>
-                        <?php foreach ($results as $result): ?>
-                        <tr class="border-b">
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><?php echo $result->show->name ?></td>
-                            <?php if (!empty($result->show->network->name)): ?>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><?php echo ' ' . $result->show->network->name ?></td>
-                            <?php else: ?>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><?php echo "CNN" ?></td>
-                            <?php endif; ?>
-                            <?php if (!empty($result->show->network->country->name)): ?>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><?php echo $result->show->network->country->name ?></td>
-                            <?php else: ?>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><?php echo "UK" ?></td>
-                            <?php endif; ?>
-                        </tr>
-                        <?php endforeach; ?>
-                    </thead>
-                </table>
-                <script>
-                    function searchFunction() {
-                        var input, filter, table, tr, td, i, txtValue;
-                        input = document.getElementById("myInput");
-                        filter = input.value.toUpperCase();
-                        table = document.getElementById("myTable");
-                        tr = table.getElementsByTagName("tr");
-                        for (i = 0; i < tr.length; i++) {
-                            td = tr[i].getElementsByTagName("td")[0];
-                            if (td) {
-                                txtValue = td.textContent || td.innerText;
-                                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                                    tr[i].style.display = "";
-                                } else {
-                                    tr[i].style.display = "none";
-                                }
-                            }
-                        }
-                    }
-                </script>
+<div>
+    <?php require 'SearchBar.php'?>
+    <section class="bg-white dark:bg-gray-900">
+        <div class="container px-6 py-10 mx-auto">
+            <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-4">
+
+                <?php foreach ($results as $result): ?>
+                    <div class="flex flex-col items-center p-8 transition-colors duration-200 transform border cursor-pointer rounded-xl hover:border-transparent group hover:bg-blue-600 dark:border-gray-700 dark:hover:border-transparent">
+                        <?php if (empty($result->show->image->medium)): ?>
+                            <img class="object-cover w-32 h-32 rounded-full ring-4 ring-gray-300" src='https://thumbs.dreamstime.com/z/healthy-blonde-woman-portrait-beauty-girl-long-healthy-blond-hair-perfect-clear-skin-natural-beauty-healthy-blonde-woman-139081463.jpg' alt="img">
+                        <?php else: ?>
+                            <img class="object-cover w-32 h-32 rounded-full ring-4 ring-gray-300" src='<?= $result->show->image->medium ?>' alt="img">
+                        <?php endif; ?>
+
+                        <h1 class="mt-4 text-2xl font-semibold text-gray-700 capitalize dark:text-white group-hover:text-white"><?= $result->show->name ?></h1>
+
+                        <?php if (empty($result->show->network->name)): ?>
+                            <p class="mt-2 text-gray-500 capitalize dark:text-gray-300 group-hover:text-gray-300">MTV</p>
+                        <?php else: ?>
+                            <p class="mt-2 text-gray-500 capitalize dark:text-gray-300 group-hover:text-gray-300"><?= $result->show->network->name ?></p>
+                        <?php endif; ?>
+                        <!--- here -->
+                    </div>
+                <?php endforeach; ?>
             </div>
-        </div>
-    </div>
+    </section>
 </div>
-
-<?php require 'GirlsShowForm.php' ?>
-
 
