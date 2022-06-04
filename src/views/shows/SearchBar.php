@@ -3,7 +3,7 @@
         <form method="post" action="/">
         <input
             type="text"
-            name="fname"
+            name="keyword"
             id="myInput"
             onkeyup="searchFunction()"
             placeholder="Choose your favorite show..."
@@ -47,12 +47,12 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // collect value of input field
-    $name = $_POST['fname'];
-//    if (!empty($name)) {
-//        echo "Name is empty";
-//    } else {
-//        echo $name;
-//    }
-    echo 'hiiiiiiiiiiiiii';
+    $key_word = $_POST['keyword'];
+    if (empty($key_word)) {
+        echo "Name is empty";
+    }
+    else {
+        echo $key_word;
+    }
 }
 ?>

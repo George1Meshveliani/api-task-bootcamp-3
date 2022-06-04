@@ -38,7 +38,7 @@ class HomeController {
         $value0 = 0;
         $value1 = 1;
 
-        $showsForm = View::make('shows/GirlsShowForm', [
+        $showsForm = View::make('shows/SearchBar', [
                 'value0' => $value0,
                 'value1' => $value1,
             ]
