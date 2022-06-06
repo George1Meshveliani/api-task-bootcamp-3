@@ -1,6 +1,7 @@
 <div class="flex justify-center">
     <div class="mb-3 xl:w-96">
-        <form method="post" action="/">
+        <form method="post" action="/dashboard">
+            <?php if ($_SERVER['REQUEST_URI'] !== '/dashboard'):  ?>
         <input
             type="text"
             name="keyword"
@@ -25,6 +26,7 @@
                     m-0
                     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
                   "
+                  required
         >
         <br />
             <div class="flex justify-center">
@@ -40,19 +42,32 @@
                               "
                 >
             </div>
+            <?php else: ?>
+            <h1>Here are chosen shows</h1>
+            <?php endif; ?>
         </form>
     </div>
 </div>
 
 <?php
+use App\ApiControllers\FetchApi;
+//use PDO;
+
+$url = "https://api.tvmaze.com/search/shows?q=girls";
+$data = new FetchApi($url);
+
+$results = $data->getData();
+
+$names = [];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // collect value of input field
     $key_word = $_POST['keyword'];
-    if (empty($key_word)) {
-        echo "Name is empty";
+    foreach ($results as $result) {
+        $names[] = $result->show->name;
     }
-    else {
+    if (in_array($key_word, $names)) {
         echo $key_word;
     }
+    else {
+        echo 'no';
+    }
 }
-?>
