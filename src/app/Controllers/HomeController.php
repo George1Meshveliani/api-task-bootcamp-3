@@ -10,11 +10,7 @@ use PDO;
 
 class HomeController {
 
-    public function index(): string {
-        return 'Data';
-    }
-
-    public function update(): View {
+    public function index(): View {
         $url = "https://api.tvmaze.com/search/shows?q=girls";
         $data = new FetchApi($url);
 
@@ -24,12 +20,15 @@ class HomeController {
 //        $data_to_insert = new InsertExample($db);
 //        $data_to_insert->insertDataExample( 'shows_list');
 
-//        var_dump($results);
         return View::make('shows/GirlsShow',
             [
                 'results' => $results,
             ]
         );
+    }
+
+    public function update() {
+        return 'Imported Data';
     }
 
 

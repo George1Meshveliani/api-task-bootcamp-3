@@ -24,7 +24,7 @@ define('VIEW_PATH', __DIR__ . '/../views');
 $router = new \App\Route\Router();
 
 $router
-    ->get('/', [App\Controllers\HomeController::class, 'update'])
+    ->get('/', [App\Controllers\HomeController::class, 'index'])
 //    ->get('/', [App\Controllers\HomeController::class, 'insert'])
     ->post('/', [App\Controllers\HomeController::class, 'store'])
     ->get('/source', [App\Controllers\SourceController::class, 'index']);
