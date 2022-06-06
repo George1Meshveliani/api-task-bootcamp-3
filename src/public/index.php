@@ -25,6 +25,7 @@ $router = new \App\Route\Router();
 
 $router
     ->get('/', [App\PageControllers\HomeController::class, 'index'])
+    ->get('/dashboard', [App\PageControllers\DashboardController::class, 'update'])
 //    ->get('/', [App\PageControllers\HomeController::class, 'insert'])
     ->post('/', [App\PageControllers\HomeController::class, 'store'])
     ->get('/source', [App\PageControllers\SourceController::class, 'index']);
