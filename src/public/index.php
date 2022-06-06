@@ -24,9 +24,9 @@ define('VIEW_PATH', __DIR__ . '/../views');
 $router = new \App\Route\Router();
 
 $router
-    ->get('/', [App\Controllers\HomeController::class, 'index'])
-//    ->get('/', [App\Controllers\HomeController::class, 'insert'])
-    ->post('/', [App\Controllers\HomeController::class, 'store'])
-    ->get('/source', [App\Controllers\SourceController::class, 'index']);
+    ->get('/', [App\PageControllers\HomeController::class, 'index'])
+//    ->get('/', [App\PageControllers\HomeController::class, 'insert'])
+    ->post('/', [App\PageControllers\HomeController::class, 'store'])
+    ->get('/source', [App\PageControllers\SourceController::class, 'index']);
 
 echo $router->resolve($_SERVER['REQUEST_URI'],  $_SERVER['REQUEST_METHOD']);

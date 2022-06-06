@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Controllers;
+namespace App\PageControllers;
 
 use App\DatabaseControllers\InsertExample;
 use App\ViewsControllers\View;
