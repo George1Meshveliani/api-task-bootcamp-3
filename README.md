@@ -1,4 +1,6 @@
-#### Instructions
+## Instructions
+
+#### Project
 
 1. `cd docker`
 2. Start the project: `docker-compose up`
@@ -8,3 +10,7 @@
 6. Initial password of the database: `changeme`
 7. Shut down the project: `docker-compose down`
 
+#### Import Database
+
+1. Create a database named `favorite_shows_list`.
+2. Import `.sql` file in the database to create an initial table.
