@@ -7,6 +7,7 @@
 <body>
 <ul>
     <li class="navbar"><a href="/">Home</a></li>
+    <li class="navbar"><a href="/dashboard">Dashboard</a></li>
     <li class="navbar"><a href="/source">Source</a></li>
 </ul>
 </body>
@@ -21,14 +22,6 @@ define('VIEW_PATH', __DIR__ . '/../views');
 
 
 $router = new \App\Route\Router();
-
-//if (isset($_POST['checkbox'])) {
-//    var_dump('true');
-//}
-//else {
-//    var_dump('false');
-//}
-//var_dump($_POST['checkbox']);
 
 $router
     ->get('/', [App\Controllers\HomeController::class, 'update'])
