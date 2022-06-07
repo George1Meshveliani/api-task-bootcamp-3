@@ -16,7 +16,7 @@ class InsertExample {
         $channel = $second_parameter;
 
         $query = 'INSERT INTO  '. $table_name . ' (name, channel)
-              VALUES (:name, :channel)';
+                  VALUES (:name, :channel)';
         $id_query = 'SELECT * FROM '.  $table_name  . ' WHERE id =';
 
         $stmt = $this->db->prepare($query);
