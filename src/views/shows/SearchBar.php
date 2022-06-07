@@ -51,6 +51,8 @@
 
 <?php
 use App\ApiControllers\FetchApi;
+use App\DatabaseControllers\InsertExample;
+
 //use PDO;
 
 
@@ -60,9 +62,8 @@ $data = new FetchApi($url);
 $results = $data->getData();
 
 $db = new PDO('mysql:host=db;dbname=favorite_shows_list', 'root', 'changeme');
-
-
 $table_name = 'shows_list';
+$data_to_insert = new InsertExample($db);
 
 $names = [];
 $channel = [];
@@ -72,22 +73,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result->show->name === $key_word) {
             $name = $key_word;
             $channel = $result->show->network->name;
-            $query = 'INSERT INTO  '. $table_name . ' (name, channel)
-              VALUES (:name, :channel)';
-            $id_query = 'SELECT * FROM '.  $table_name  . ' WHERE id =';
-
-            $stmt = $db->prepare($query);
-
-            $stmt->bindValue(':name', $name);
-            $stmt->bindValue(':channel', $channel);
-
-            $stmt->execute();
-
-            $id = (int) $db->lastInsertId();
-
-            return $db->query($id_query . $id)->fetch();
+            $data_to_insert->insertDataExample($table_name, $name, $channel);
         }
-
         if (!in_array($result->show->name, $names)) {
             $names[] = $result->show->name;
         }

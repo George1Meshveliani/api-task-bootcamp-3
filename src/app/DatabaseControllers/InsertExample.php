@@ -10,10 +10,10 @@ class InsertExample {
         $this->db = $db;
     }
 
-    public function insertDataExample($table_name) {
+    public function insertDataExample($table_name, $first_parameter, $second_parameter) {
 
-        $name = "TV show";
-        $channel = "BBC";
+        $name = $first_parameter;
+        $channel = $second_parameter;
 
         $query = 'INSERT INTO  '. $table_name . ' (name, channel)
               VALUES (:name, :channel)';
