@@ -62,7 +62,9 @@ $names = [];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $key_word = $_POST['keyword'];
     foreach ($results as $result) {
-        $names[] = $result->show->name;
+        if (!in_array($result->show->name, $names)) {
+            $names[] = $result->show->name;
+        }
     }
     if (in_array($key_word, $names)) {
         echo $key_word;
