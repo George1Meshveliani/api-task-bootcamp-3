@@ -20,10 +20,31 @@ class DashboardController
         $value1 = 1;
 
         $db = new PDO('mysql:host=db;dbname=favorite_shows_list', 'root', 'changeme');
-        $stmt = $db->query("SELECT * FROM shows_list");
-        $res =  $stmt->fetchAll();
+//        $stmt = $db->query("SELECT * FROM shows_list");
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = "SELECT * FROM shows_list";
+        $statement = $db->prepare($query);
+        $statement->execute();
 
-
+        $statement->setFetchMode(PDO::FETCH_OBJ); //PDO::FETCH_ASSOC
+        $result = $statement->fetchAll();
+        if($result)
+        {
+            foreach($result as $row)
+            {
+                ?>
+                <tr>
+                    <td>  <?=  "name - " . $row->name; ?></td>
+                    <td><?= "channel - " . $row->channel; ?></td>
+                </tr>
+                <?php
+            }
+        }
+//        $res =  $stmt->fetch(PDO::FETCH_NUM);
+//        var_dump($res);
+//        foreach ($res as $r) {
+//            echo $r->name;
+//        }
         $showsForm = View::make('shows/SearchBar', [
                 'value0' => $value0,
                 'value1' => $value1,
