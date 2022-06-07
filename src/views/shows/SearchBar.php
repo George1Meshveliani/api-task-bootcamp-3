@@ -53,23 +53,46 @@
 use App\ApiControllers\FetchApi;
 //use PDO;
 
+
 $url = "https://api.tvmaze.com/search/shows?q=girls";
 $data = new FetchApi($url);
 
 $results = $data->getData();
 
+$db = new PDO('mysql:host=db;dbname=favorite_shows_list', 'root', 'changeme');
+
+
+$table_name = 'shows_list';
+
 $names = [];
+$channel = [];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $key_word = $_POST['keyword'];
     foreach ($results as $result) {
+        if ($result->show->name === $key_word) {
+            $name = $key_word;
+            $channel = $result->show->network->name;
+            $query = 'INSERT INTO  '. $table_name . ' (name, channel)
+              VALUES (:name, :channel)';
+            $id_query = 'SELECT * FROM '.  $table_name  . ' WHERE id =';
+
+            $stmt = $db->prepare($query);
+
+            $stmt->bindValue(':name', $name);
+            $stmt->bindValue(':channel', $channel);
+
+            $stmt->execute();
+
+            $id = (int) $db->lastInsertId();
+
+            return $db->query($id_query . $id)->fetch();
+        }
+
         if (!in_array($result->show->name, $names)) {
             $names[] = $result->show->name;
         }
     }
-    if (in_array($key_word, $names)) {
-        echo $key_word;
-    }
-    else {
-        echo 'no';
+    if (!in_array($key_word, $names)) {
+        echo 'There is no ' . $key_word . ' in list, try again';
     }
 }
