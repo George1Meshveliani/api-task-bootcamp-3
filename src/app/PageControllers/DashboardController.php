@@ -29,20 +29,18 @@ class DashboardController
         $arr1 = [];
         $statement->setFetchMode(PDO::FETCH_OBJ); //PDO::FETCH_ASSOC
         $result = $statement->fetchAll();
-        if($result)
-        {
-            foreach($result as $row)
-            {
+        if ($result):
+            foreach($result as $row):
                 $arr1[] = $row->name;
                 ?>
                 <tr>
-                    <td>  <?=  "name - " . $row->name; ?></td>
+                    <td><?= "name - " . $row->name; ?></td>
                     <td><?= "channel - " . $row->channel; ?></td>
                 </tr>
 
                 <?php
-            }
-        }
+            endforeach;
+        endif;
         var_dump($arr1);
 //        $res =  $stmt->fetch(PDO::FETCH_NUM);
 //        var_dump($res);
