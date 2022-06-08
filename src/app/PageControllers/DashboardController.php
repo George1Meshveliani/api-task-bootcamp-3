@@ -33,7 +33,7 @@ class DashboardController
 
         if ($result) {
             foreach($result as $row) {
-                if (!in_array($names_array, $row->name) && !in_array($channels_array, $row->channel)) {
+                if (!in_array($row->name, $names_array) && !in_array($row->channel, $channels_array)) {
                     $names_array[] = $row->name;
                     $channels_array[] = $row->channel;
                 }
@@ -48,7 +48,6 @@ class DashboardController
             ]
         );
         return $showsForm;
-
     }
 
 }
