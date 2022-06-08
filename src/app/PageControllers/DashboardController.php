@@ -20,16 +20,18 @@ class DashboardController
         $value1 = 1;
 
         $db = new PDO('mysql:host=db;dbname=favorite_shows_list', 'root', 'changeme');
-//        $stmt = $db->query("SELECT * FROM shows_list");
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
         $query = "SELECT * FROM shows_list";
         $statement = $db->prepare($query);
         $statement->execute();
 
-        $names_array = [];
-        $channels_array = [];
         $statement->setFetchMode(PDO::FETCH_OBJ); //PDO::FETCH_ASSOC
         $result = $statement->fetchAll();
+
+        $names_array = [];
+        $channels_array = [];
 
         if ($result) {
             foreach($result as $row) {

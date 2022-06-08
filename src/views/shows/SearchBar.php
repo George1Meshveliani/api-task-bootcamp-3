@@ -67,6 +67,7 @@ $results = $data->getData();
 
 $db = new PDO('mysql:host=db;dbname=favorite_shows_list', 'root', 'changeme');
 $table_name = 'shows_list';
+
 $data_to_insert = new InsertExample($db);
 
 $names = [];
