@@ -26,30 +26,22 @@ class DashboardController
         $statement = $db->prepare($query);
         $statement->execute();
 
-        $arr1 = [];
+        $names_array = [];
+        $channels_array = [];
         $statement->setFetchMode(PDO::FETCH_OBJ); //PDO::FETCH_ASSOC
         $result = $statement->fetchAll();
-        if ($result):
-            foreach($result as $row):
-                $arr1[] = $row->name;
-                ?>
-                <tr>
-                    <td><?= "name - " . $row->name; ?></td>
-                    <td><?= "channel - " . $row->channel; ?></td>
-                </tr>
+        if ($result) {
+            foreach($result as $row) {
+                $names_array[] = $row->name;
+                $channels_array[] = $row->channel;
+            }
+        }
 
-                <?php
-            endforeach;
-        endif;
-        var_dump($arr1);
-//        $res =  $stmt->fetch(PDO::FETCH_NUM);
-//        var_dump($res);
-//        foreach ($res as $r) {
-//            echo $r->name;
-//        }
         $showsForm = View::make('shows/SearchBar', [
-                'value0' => $value0,
-                'value1' => $value1,
+                'value0'         => $value0,
+                'value1'         => $value1,
+                'names_array'    => $names_array,
+                'channels_array' => $channels_array,
             ]
         );
         return $showsForm;
