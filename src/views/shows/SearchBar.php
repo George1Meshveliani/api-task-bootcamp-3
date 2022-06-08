@@ -43,7 +43,11 @@
                 >
             </div>
             <?php else: ?>
-            <h1>Here are chosen shows</h1>
+                <meta http-equiv="refresh" content="0">
+            <h1>Here is list of chosen shows</h1>
+                <?php foreach ($names_array as $name_array): ?>
+                    <u><li><?php echo $name_array ?></li></u>
+                <?php endforeach; ?>
             <?php endif; ?>
         </form>
     </div>
