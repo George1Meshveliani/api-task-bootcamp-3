@@ -30,10 +30,13 @@ class DashboardController
         $channels_array = [];
         $statement->setFetchMode(PDO::FETCH_OBJ); //PDO::FETCH_ASSOC
         $result = $statement->fetchAll();
+
         if ($result) {
             foreach($result as $row) {
-                $names_array[] = $row->name;
-                $channels_array[] = $row->channel;
+                if (!in_array($names_array, $row->name) && !in_array($channels_array, $row->channel)) {
+                    $names_array[] = $row->name;
+                    $channels_array[] = $row->channel;
+                }
             }
         }
 
