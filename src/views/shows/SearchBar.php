@@ -44,7 +44,7 @@
             </div>
             <?php else: ?>
                 <meta http-equiv="refresh" content="0">
-            <h1>Here is list of chosen shows</h1>
+            <h1>Here is the list of chosen shows</h1>
                 <?php foreach ($names_array as $name_array): ?>
                     <u><li><?php echo $name_array ?></li></u>
                 <?php endforeach; ?>
@@ -76,7 +76,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     foreach ($results as $result) {
         if ($result->show->name === $key_word) {
             $name = $key_word;
-            $channel = $result->show->network->name;
+            if (!empty($result->show->network->name)) {
+                $channel = $result->show->network->name;
+            }
+            else {
+                $channel = 'TV +18';
+            }
             $data_to_insert->insertDataExample($table_name, $name, $channel);
         }
         if (!in_array($result->show->name, $names)) {
